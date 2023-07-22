@@ -6,32 +6,38 @@
 
 #include <stdio.h>
 
+// 记住: 8 个 h
+void shell_sort(int a[], int len)
+{
+  int h = 5;
+
+  while (h >= 1) {
+    for (int i = h; i < len; i++) {
+      int elem = a[i];
+      int j;
+      for (j = i - h; j >= 0; j -= h) {
+        if (a[j] > elem)
+          a[j + h] = a[j];
+        else
+          break;
+      }
+      a[j + h] = elem;
+    }
+    h /= 2; // 缩减增量，直至为 1。(不一定除以 2，但必须要保证最终执行了一次增量 1)
+  }
+}
+
 int main()
 {
-    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
-    int len = sizeof(a) / sizeof(int);
-    
-    int h = 5;  // 选择一个合适的增量，增量为 1 时会退化为直接插入排序
+  int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+  int len = sizeof(a) / sizeof(int);
 
-    while (h >= 1) {
-        for (int i = h; i < len; i++) {
-            int ele = a[i];
-            int j;
-            for (j = i - h; j >= 0; j -= h) {
-                if (a[j] > ele)
-                    a[j + h] = a[j];
-                else
-                    break; 
-            }
-            a[j + h] = ele;
-        }
-        h /= 2;             // 缩减增量，直至为 1。(不一定除以 2，但必须要保证最终执行了一次增量 1)
-    }
+  shell_sort(a, len);
 
-    for (int i = 0; i < len; i++) {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
+  for (int i = 0; i < len; i++) {
+    printf("%d ", a[i]);
+  }
+  printf("\n");
 
-    return 0;
+  return 0;
 }

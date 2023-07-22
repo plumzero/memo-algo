@@ -15,63 +15,63 @@
 
 int count_range(int a[], int len, int start, int end)
 {
-    int count = 0;
-    for (int i = 0; i < len; i++) {
-        if (a[i] >= start && a[i] <= end)
-            count++;
-    }
+  int count = 0;
+  for (int i = 0; i < len; i++) {
+    if (a[i] >= start && a[i] <= end)
+      count++;
+  }
 
-    return count;
+  return count;
 }
 
 bool dup_in_array_no_edit(int a[], int len, int* dup)
 {
-    // assert(a != nullptr && len > 0);
-    // assert(a[i] > 0 && a[i] < len);
+  // assert(a != nullptr && len > 0);
+  // assert(a[i] > 0 && a[i] < len);
 
-    //注意: start 和 end 不是数组下标，而是每次查找数组元素的值的范围
-    int start = 1;
-    int end = len - 1;
-    while (start <= end) {
-        int mid = start + (end - start) / 2;
-        int count = count_range(a, len, start, mid);
-        if (start == end) {
-            if (count > 1) {
-                *dup = start;
-                return true;
-            }
-        }
-        if (count > mid - start + 1) {
-            end = mid;  // 在进行二分时，并没有排除中间元素，所以必须要在 while 循环内部返回，否则会死循环
-        } else {
-            start = mid + 1;
-        }
+  //注意: start 和 end 不是数组下标，而是每次查找数组元素的值的范围
+  int start = 1;
+  int end = len - 1;
+  while (start <= end) {
+    int mid = start + (end - start) / 2;
+    int count = count_range(a, len, start, mid);
+    if (start == end) {
+      if (count > 1) {
+        *dup = start;
+        return true;
+      }
     }
+    if (count > mid - start + 1) {
+      end = mid;  // 在进行二分时，并没有排除中间元素，所以必须要在 while 循环内部返回，否则会死循环
+    } else {
+      start = mid + 1;
+    }
+  }
 
-    return false;
+  return false;
 }
 
 int main()
 {
-    {
-        int a[] = { 2, 3, 5, 4, 3, 2, 6, 7 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 2, 3, 5, 4, 3, 2, 6, 7 };
+    int len = sizeof(a) / sizeof(int);
 
-        int dup;
-        if (dup_in_array_no_edit(a, len, &dup)) {
-            printf("dup=%d\n", dup);
-        }
+    int dup;
+    if (dup_in_array_no_edit(a, len, &dup)) {
+      printf("dup=%d\n", dup);
     }
+  }
 
-    {
-        int a[] = { 1, 2, 3, 4, 5, 6, 7, 7 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 1, 2, 3, 4, 5, 6, 7, 7 };
+    int len = sizeof(a) / sizeof(int);
 
-        int dup;
-        if (dup_in_array_no_edit(a, len, &dup)) {
-            printf("dup=%d\n", dup);
-        }
+    int dup;
+    if (dup_in_array_no_edit(a, len, &dup)) {
+      printf("dup=%d\n", dup);
     }
+  }
 
-    return 0;
+  return 0;
 }

@@ -10,61 +10,60 @@
 
 void insert_sort(int a[], int len)
 {
-    for (int i = 1; i < len; i++) {
-        int ele = a[i];
-        int j;
-        for (j = i - 1; j >= 0; j--) {
-            if (a[j] > ele) {
-                a[j + 1] = a[j];    // 后移
-            } else {
-                break;          // 加快速度
-            }
-        }
-        a[j + 1] = ele;
+  for (int i = 1; i < len; i++) {
+    int elem = a[i];
+    int j;
+    for (j = i - 1; j >= 0; j--) {
+      if (a[j] > elem)
+        a[j + 1] = a[j];  // 后移
+      else
+        break;            // 加速
     }
+    a[j + 1] = elem;
+  }
 }
 
 void insert_sort_desc(int* a, int len)
 {
-    for (int i = 1; i < len; i++) {
-        int ele = a[i];
-        int j;
-        for (j = i - 1; j >= 0; j--) {
-            if (a[j] < ele) {
-                a[j + 1] = a[j];    // 后移
-            } else {
-                break;          // 加快速度
-            }
-        }
-        a[j + 1] = ele;
+  for (int i = 1; i < len; i++) {
+    int elem = a[i];
+    int j;
+    for (j = i - 1; j >= 0; j--) {
+      if (a[j] < elem) {
+        a[j + 1] = a[j];    // 后移
+      } else {
+        break;          // 加快速度
+      }
     }
+    a[j + 1] = elem;
+  }
 }
 
 int main()
 {
-    {
-        int a[] = { 3, 1, 4, 1, 5, 9, 2, 6 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 3, 1, 4, 1, 5, 9, 2, 6 };
+    int len = sizeof(a) / sizeof(int);
 
-        insert_sort(a, len);
+    insert_sort(a, len);
 
-        for (int i = 0; i < len; i++) {
-            printf("%d ", a[i]);
-        }
-        printf("\n");
+    for (int i = 0; i < len; i++) {
+      printf("%d ", a[i]);
     }
+    printf("\n");
+  }
 
-    {
-        int a[] = { 3, 1, 4, 1, 5, 9, 2, 6 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 3, 1, 4, 1, 5, 9, 2, 6 };
+    int len = sizeof(a) / sizeof(int);
 
-        insert_sort_desc(a, len);
+    insert_sort_desc(a, len);
 
-        for (int i = 0; i < len; i++) {
-            printf("%d ", a[i]);
-        }
-        printf("\n");
+    for (int i = 0; i < len; i++) {
+      printf("%d ", a[i]);
     }
+    printf("\n");
+  }
 
-    return 0;
+  return 0;
 }

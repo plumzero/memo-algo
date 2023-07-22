@@ -10,33 +10,32 @@
 
 #include <stdio.h>
 
-void select_sort(int* a, int len)
+void select_sort(int a[], int len)
 {
-    int ele;
-    for (int i = 0; i < len - 1; i++) {
-        int j = i;
-        for (int k = i + 1; k < len; k++) { // 只需要记录最小值的索引就行了
-            if (a[j] > a[k])                // 比较过程中并不需要排序，因为每次比较是为了找出剩余最小值所在的索引
-                j = k;
-        }
-        if (i != j) {
-            ele = a[i];
-            a[i] = a[j];
-            a[j] = ele;
-        }
+  for (int i = 0; i < len; i++) {
+    int j = i; // j 记录 [i, len - 1] 范围内最小值的索引
+    for (int k = i + 1; k < len; k++) {
+      if (a[j] > a[k])  // 降序排改为 a[j] < a[k]
+        j = k;
     }
+    if (i != j) {
+      int t = a[i];
+      a[i] = a[j];
+      a[j] = t;
+    }
+  }
 
-    for (int i = 0; i < len; i++) {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
+  for (int i = 0; i < len; i++) {
+    printf("%d ", a[i]);
+  }
+  printf("\n");
 }
 
 int main()
 {
-    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+  int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
 
-    select_sort(a, sizeof(a)/sizeof(int));
+  select_sort(a, sizeof(a)/sizeof(int));
 
-    return 0;
+  return 0;
 }

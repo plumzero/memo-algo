@@ -23,58 +23,58 @@
 
 int min_order(int a[], int start, int end)
 {
-    int min = a[start];
-    for (int i = start + 1; i <= end; i++) {
-        if (min > a[i]) {
-            min = a[i];
-        }
+  int min = a[start];
+  for (int i = start + 1; i <= end; i++) {
+    if (min > a[i]) {
+      min = a[i];
     }
+  }
 
-    return min;
+  return min;
 }
 
 int get_min(int a[], int len)
 {
-    // assert(a != nullptr && len > 0);
+  // assert(a != nullptr && len > 0);
 
-    int left = 0;
-    int right = len - 1;
-    int mid;
-    while (left < right) {
-        if (right - left == 1) {
-            mid = right;
-            break;
-        }
-        mid = left + (right - left) / 2;
-        if (a[mid] == a[left] && a[mid] == a[right])
-            return min_order(a, left, right);
-
-        if (a[mid] >= a[left]) {
-            left = mid;
-        } else if (a[mid] <= a[right]) {
-            right = mid;
-        }
+  int left = 0;
+  int right = len - 1;
+  int mid;
+  while (left < right) {
+    if (right - left == 1) {
+      mid = right;
+      break;
     }
+    mid = left + (right - left) / 2;
+    if (a[mid] == a[left] && a[mid] == a[right])
+      return min_order(a, left, right);
 
-    return a[mid];
+    if (a[mid] >= a[left]) {
+      left = mid;
+    } else if (a[mid] <= a[right]) {
+      right = mid;
+    }
+  }
+
+  return a[mid];
 }
 
 int main()
 {
-    {
-        int a[] = { 3, 4, 5, 1, 2 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 3, 4, 5, 1, 2 };
+    int len = sizeof(a) / sizeof(int);
 
-        printf("%d\n", get_min(a, len));
-    }
+    printf("%d\n", get_min(a, len));
+  }
 
-    {
-        int a[] = { 1, 0, 1, 1, 1 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 1, 0, 1, 1, 1 };
+    int len = sizeof(a) / sizeof(int);
 
-        printf("%d\n", get_min(a, len));
-    }
+    printf("%d\n", get_min(a, len));
+  }
 
-    return 0;
+  return 0;
 }
 

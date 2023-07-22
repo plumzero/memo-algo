@@ -17,33 +17,33 @@
 
 bool duplication_in_array(int a[], int len, int* dup)
 {
-    // assert(a != nullptr && len > 0);
-    // assert(a[i] >= 0 && a[i] < len)
-    for (int i = 0; i < len; i++)
-    {
-        while (a[i] != i) {
-            if (a[i] == a[a[i]]) {
-                *dup = a[i];
-                return true;
-            }
-            int tmp = a[i];
-            a[i] = a[tmp];
-            a[tmp] = tmp;
-        }
+  // assert(a != nullptr && len > 0);
+  // assert(a[i] >= 0 && a[i] < len)
+  for (int i = 0; i < len; i++)
+  {
+    while (a[i] != i) {
+      if (a[i] == a[a[i]]) {
+        *dup = a[i];
+        return true;
+      }
+      int tmp = a[i];
+      a[i] = a[tmp];
+      a[tmp] = tmp;
     }
+  }
 
-    return false;
+  return false;
 }
 
 int main()
 {
-    int a[] = { 2, 3, 1, 0, 2, 5, 3 };
-    int len = sizeof(a) / sizeof(int);
+  int a[] = { 2, 3, 1, 0, 2, 5, 3 };
+  int len = sizeof(a) / sizeof(int);
 
-    int dup;
-    if (duplication_in_array(a, len, &dup)) {
-        printf("%d\n", dup);
-    }
+  int dup;
+  if (duplication_in_array(a, len, &dup)) {
+    printf("%d\n", dup);
+  }
 
-    return 0;
+  return 0;
 }
