@@ -17,134 +17,133 @@
 
 ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
 {
-    ListNode* p1 = pHead1;
-    ListNode* p2 = pHead2;
-    ListNode* pNode = nullptr;
-    ListNode* pHead = nullptr;
+  ListNode* pNode1 = pHead1;
+  ListNode* pNode2 = pHead2;
+  ListNode* pHead = nullptr;
+  ListNode* pCur = nullptr;
 
-    while (p1 && p2) {
-        if (p1->val > p2->val) {
-            if (pHead == nullptr) {
-                pHead = p2;
-            } else {
-                pNode->next = p2;
-            }
-            pNode = p2;
-            p2 = p2->next;
-        } else {
-            if (pHead == nullptr) {
-                pHead = p1;
-            } else {
-                pNode->next = p1;
-            }
-            pNode = p1;
-            p1 = p1->next;
-        }
+  while (pNode1 && pNode2) {
+    if (pNode1->val > pNode2->val) {
+      if (pHead == nullptr) {
+        pHead = pNode2;
+      } else {
+        pCur->next = pNode2;
+      }
+      pCur = pNode2;
+      pNode2 = pNode2->next;
+    } else {
+      if (pHead == nullptr) {
+        pHead = pNode1;
+      } else {
+        pCur->next = pNode1;
+      }
+      pCur = pNode1;
+      pNode1 = pNode1->next;
     }
+  }
 
-    while (p1) {
-        if (pHead == nullptr)
-            pHead = p1;
-        else {
-            pNode->next = p1;
-        }
-        pNode = p1;
-        p1 = p1->next;
+  while (pNode1) {
+    if (pHead == nullptr) {
+      pHead = pNode1;
+    } else {
+      pCur->next = pNode1;
     }
+    pCur = pNode1;
+    pNode1 = pNode1->next;
+  }
 
-    while (p2) {
-        if (pHead == nullptr)
-            pHead = p2;
-        else {
-            pNode->next = p2;
-        }
-        pNode = p2;
-        p2 = p2->next;
+  while (pNode2) {
+    if (pHead == nullptr) {
+      pHead = pNode2;
+    } else {
+      pCur->next = pNode2;
     }
+    pCur = pNode2;
+    pNode2 = pNode2->next;
+  }
 
-    return pHead;
+  return pHead;
 }
 
 // 分析二:
 // 尝试递归
-
 ListNode* merge_sort_list2(ListNode* pNode1, ListNode* pNode2)
 {
-    if (pNode1 == nullptr)
-        return pNode2;
-    if (pNode2 == nullptr)
-        return pNode1;
-    
-    ListNode* merged = nullptr;
+  // 如果其中一个链表已经到最后，则链接到另一个链表
+  if (pNode1 == nullptr)
+    return pNode2;
+  if (pNode2 == nullptr)
+    return pNode1;
 
-    if (pNode1->val > pNode2->val) {
-        merged = pNode2;
-        merged->next = merge_sort_list2(pNode1, pNode2->next);
-    } else {
-        merged = pNode1;
-        merged->next = merge_sort_list2(pNode1->next, pNode2);
-    }
+  ListNode* merged = nullptr;
+  if (pNode1->val > pNode2->val) {
+    merged = pNode2;
+    merged->next = merge_sort_list2(pNode1, pNode2->next);
+  } else {
+    merged = pNode1;
+    merged->next = merge_sort_list2(pNode1->next, pNode2);
+  }
 
-    return merged;
+  return merged;
 }
 
 int main()
 {
-    {
-        ListNode* head1 = create_list(4, 1, 3, 5, 7);
-        ListNode* head2 = create_list(4, 2, 4, 6, 8);
-        ListNode* head = merge_sort_list(head1, head2);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list(head1, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head1 = create_list(4, 1, 3, 5, 7);
-        ListNode* head = merge_sort_list(head1, nullptr);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head = merge_sort_list(head1, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head2 = create_list(4, 2, 4, 6, 8);
-        ListNode* head = merge_sort_list(nullptr, head2);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list(nullptr, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head = merge_sort_list(nullptr, nullptr);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head = merge_sort_list(nullptr, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head1 = create_list(4, 1, 3, 5, 7);
-        ListNode* head2 = create_list(4, 2, 4, 6, 8);
-        ListNode* head = merge_sort_list2(head1, head2);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list2(head1, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head1 = create_list(4, 1, 3, 5, 7);
-        ListNode* head = merge_sort_list2(head1, nullptr);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head = merge_sort_list2(head1, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head2 = create_list(4, 2, 4, 6, 8);
-        ListNode* head = merge_sort_list2(nullptr, head2);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list2(nullptr, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head = merge_sort_list2(nullptr, nullptr);
-        print_list(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head = merge_sort_list2(nullptr, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
 
-    return 0;
+  return 0;
 }

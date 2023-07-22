@@ -14,47 +14,46 @@
 
 void reverse_print(ListNode* pHead)
 {
-    if (pHead != nullptr) {
-        std::stack<ListNode*> _stack;
-        ListNode* pNode = pHead;
-        while (pNode) {
-            _stack.push(pNode);
-            pNode = pNode->next;
-        }
+  if (pHead == nullptr)
+    return ;
+  
+  std::stack<ListNode*> _stack;
+  ListNode* pNode = pHead;
+  while (pNode) {
+    _stack.push(pNode);
+    pNode = pNode->next;
+  }
 
-        while (_stack.size() > 0) {
-            pNode = _stack.top();
-            _stack.pop();
-            printf("%d ", pNode->val);
-        }
-        printf("\n");
-    }
+  while (_stack.size() > 0) {
+    pNode = _stack.top();
+    _stack.pop();
+    printf("%d ", pNode->val);
+  }
+  printf("\n");
 }
 
-// 分析二:
-// 既然用栈了，也可以尝试递归
-void reverse_print2(ListNode* pHead)
+void reverse_print2(ListNode* pNode)
 {
-    if (pHead != nullptr) {
-        reverse_print2(pHead->next);
-        printf("%d ", pHead->val);
-    }
+  if (pNode != nullptr) {
+    reverse_print2(pNode->next);
+    printf("%d ", pNode->val);
+  }
 }
 
 int main()
 {
-    {
-        ListNode* head = create_list(6, 11, 22, 33, 44, 55, 66);
-        reverse_print(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head = create_list(6, 11, 22, 33, 44, 55, 66);
+    reverse_print(head);
+    destroy_list(&head);
+  }
 
-    {
-        ListNode* head = create_list(6, 11, 22, 33, 44, 55, 66);
-        reverse_print2(head);
-        destroy_list(&head);
-    }
+  {
+    ListNode* head = create_list(6, 11, 22, 33, 44, 55, 66);
+    reverse_print2(head);
+    destroy_list(&head);
+  }
 
-    return 0;
+  return 0;
 }
 

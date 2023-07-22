@@ -18,109 +18,109 @@
 
 ListNode* meet(ListNode* pHead)
 {
-    // assert(pHead != nullptr);
+  // assert(pHead != nullptr);
 
-    ListNode* pSlow = pHead->next;
-    if (pSlow == nullptr)
-        return nullptr;
-    
-    ListNode* pFast = pSlow->next;
-    while (pSlow != nullptr && pFast != nullptr) {
-        if (pSlow == pFast)
-            return pFast;
-        pSlow = pSlow->next;
-        pFast = pFast->next;
-        if (pFast != nullptr)
-            pFast = pFast->next;
-    }
-
+  ListNode* pSlow = pHead->next;
+  if (pSlow == nullptr)
     return nullptr;
+  
+  ListNode* pFast = pSlow->next;
+  while (pSlow && pFast) {
+    if (pSlow == pFast)
+      return pFast;
+    pSlow = pSlow->next;
+    pFast = pFast->next;
+    if (pFast != nullptr)
+      pFast = pFast->next;
+  }
+
+  return nullptr;
 }
 
 ListNode* entry_node(ListNode* pHead)
 {
-    ListNode* meeting_node = meet(pHead);
-    if (meeting_node == nullptr)
-        return nullptr;
+  ListNode* meeting_node = meet(pHead);
+  if (meeting_node == nullptr)
+    return nullptr;
+  
+  int k = 1;
+  ListNode* pNode = meeting_node->next;
+  while (pNode != meeting_node) {
+    k++;
+    pNode = pNode->next;
+  }
 
-    int k = 1;
-    ListNode* pNode = meeting_node;
-    while (pNode->next != meeting_node) {
-        k++;
-        pNode = pNode->next;
-    }
+  ListNode *pFast, *pSlow;
+  pFast = pSlow = pHead;
+  for (int i = 1; i <= k; i++) {
+    pFast = pFast->next;
+  }
 
-    ListNode *p1, *p2;
-    p1 = p2 = pHead;
-    for (int i = 1; i <= k; i++) {
-        p1 = p1->next;
-    }
+  while (pFast != pSlow) {
+    pFast = pFast->next;
+    pSlow = pSlow->next;
+  }
 
-    while (p1 != p2) {
-        p1 = p1->next;
-        p2 = p2->next;
-    }
-
-    return p1;
+  return pFast;
 }
 
 int main()
 {
-    {
-        ListNode* node1 = create_node(1);
-        ListNode* node2 = create_node(2);
-        ListNode* node3 = create_node(3);
-        ListNode* node4 = create_node(4);
-        ListNode* node5 = create_node(5);
-        ListNode* node6 = create_node(6);
+  {
+    ListNode* node1 = create_node(1);
+    ListNode* node2 = create_node(2);
+    ListNode* node3 = create_node(3);
+    ListNode* node4 = create_node(4);
+    ListNode* node5 = create_node(5);
+    ListNode* node6 = create_node(6);
 
-        connect_node(node1, node2);
-        connect_node(node2, node3);
-        connect_node(node3, node4);
-        connect_node(node4, node5);
-        connect_node(node5, node6);
-        connect_node(node6, node3);
+    connect_node(node1, node2);
+    connect_node(node2, node3);
+    connect_node(node3, node4);
+    connect_node(node4, node5);
+    connect_node(node5, node6);
+    connect_node(node6, node3);
 
-        ListNode* node = entry_node(node1);
-        if (node != nullptr) {
-            printf("%d\n", node->val);
-        }
-
-        // destroy_list(&node1);
+    ListNode* node = entry_node(node1);
+    if (node != nullptr) {
+        printf("%d\n", node->val);
     }
 
-    {
-        ListNode* node1 = create_node(1);
+    // destroy_list(&node1);
+  }
 
-        connect_node(node1, node1);
+  {
+    ListNode* node1 = create_node(1);
 
-        ListNode* node = entry_node(node1);
-        if (node != nullptr) {
-            printf("%d\n", node->val);
-        }
+    connect_node(node1, node1);
 
-        // destroy_list(&node1);
+    ListNode* node = entry_node(node1);
+    if (node != nullptr) {
+        printf("%d\n", node->val);
     }
 
-    {
-        ListNode* node1 = create_node(1);
-        ListNode* node2 = create_node(2);
-        ListNode* node3 = create_node(3);
-        ListNode* node4 = create_node(4);
-        ListNode* node5 = create_node(5);
+    // destroy_list(&node1);
+  }
 
-        connect_node(node1, node2);
-        connect_node(node2, node3);
-        connect_node(node3, node4);
-        connect_node(node4, node5);
+  {
+    ListNode* node1 = create_node(1);
+    ListNode* node2 = create_node(2);
+    ListNode* node3 = create_node(3);
+    ListNode* node4 = create_node(4);
+    ListNode* node5 = create_node(5);
 
-        ListNode* node = entry_node(node1);
-        if (node != nullptr) {
-            printf("%d\n", node->val);
-        }
+    connect_node(node1, node2);
+    connect_node(node2, node3);
+    connect_node(node3, node4);
+    connect_node(node4, node5);
 
-        // destroy_list(&node1);
+    ListNode* node = entry_node(node1);
+    if (node != nullptr) {
+        printf("%d\n", node->val);
     }
 
-    return 0;
+    // destroy_list(&node1);
+  }
+
+  return 0;
 }

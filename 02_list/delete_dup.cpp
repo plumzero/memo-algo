@@ -15,70 +15,72 @@
 
 void delete_dup(ListNode** pHead)
 {
-    // assert(pHead != nullptr && *pHead != nullptr);
+  // assert(pHead != nullptr && *pHead != nullptr);
 
-    ListNode* pNode = *pHead;
-    ListNode* preNode = nullptr;
-    while (pNode) {
-        if (pNode->next == nullptr) {
-            pNode = pNode->next;
-        } else if (pNode->val != pNode->next->val) {
-            preNode = pNode;
-            pNode = pNode->next;
-        } else {
-            int val = pNode->val;
-            while (pNode != nullptr && pNode->val == val) {
-                ListNode* pNext = pNode->next;
-                delete pNode;
-                pNode = nullptr;
-                pNode = pNext;
-            }
-            if (preNode == nullptr) {
-                *pHead = pNode;
-            } else {
-                preNode->next = pNode;
-            }
-        }
+  ListNode* pNode = *pHead;
+  ListNode* preNode = nullptr;
+
+  // 对 pNode 指向的节点进行处理
+  while (pNode) {
+    if (pNode->next == nullptr) {
+      pNode = pNode->next;
+    } else if (pNode->val != pNode->next->val) { // pNode->next != nullptr && 此条件
+      preNode = pNode;
+      pNode = pNode->next;
+    } else { // pNode->next != nullptr && pNode->val == pNode->next->val
+      int val = pNode->val;
+      while (pNode != nullptr && pNode->val == val) { // 找到第一个不为 val 的节点
+        ListNode* pNext = pNode->next;
+        delete pNode;
+        pNode = nullptr;
+        pNode = pNext;
+      }
+      if (preNode == nullptr) {
+        *pHead = pNode;
+      } else {
+        preNode->next = pNode;
+      }
     }
+  }
 }
 
 int main()
 {
-    {
-        ListNode* node1 = create_list(3, 11, 11, 22);
+  {
+    ListNode* node1 = create_list(3, 11, 11, 22);
 
-        delete_dup(&node1);
+    delete_dup(&node1);
 
-        print_list(node1);
-        destroy_list(&node1);
-    }
+    print_list(node1);
+    destroy_list(&node1);
+  }
 
-    {
-        ListNode* node1 = create_list(4, 11, 11, 22, 22);
+  {
+    ListNode* node1 = create_list(4, 11, 11, 22, 22);
 
-        delete_dup(&node1);
-        
-        print_list(node1);
-        destroy_list(&node1);
-    }
+    delete_dup(&node1);
+    
+    print_list(node1);
+    destroy_list(&node1);
+  }
 
-    {
-        ListNode* node1 = create_list(3, 11, 22, 22);
+  {
+    ListNode* node1 = create_list(3, 11, 22, 22);
 
-        delete_dup(&node1);
-        
-        print_list(node1);
-        destroy_list(&node1);
-    }
+    delete_dup(&node1);
+    
+    print_list(node1);
+    destroy_list(&node1);
+  }
 
-    {
-        ListNode* node1 = create_list(3, 11, 22, 33);
+  {
+    ListNode* node1 = create_list(3, 11, 22, 33);
 
-        delete_dup(&node1);
-        
-        print_list(node1);
-        destroy_list(&node1);
-    }
+    delete_dup(&node1);
+    
+    print_list(node1);
+    destroy_list(&node1);
+  }
 
-    return 0;
+  return 0;
 }
