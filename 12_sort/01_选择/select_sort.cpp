@@ -12,7 +12,7 @@
 
 void select_sort(int a[], int len)
 {
-  for (int i = 0; i < len; i++) {
+  for (int i = 0; i < len - 1; i++) {  // 因为最后一个元素没有了比较对象，所以只需要遍历 len - 1 次
     int j = i; // j 记录 [i, len - 1] 范围内最小值的索引
     for (int k = i + 1; k < len; k++) {
       if (a[j] > a[k])  // 降序排改为 a[j] < a[k]

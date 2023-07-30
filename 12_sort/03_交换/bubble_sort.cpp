@@ -15,120 +15,120 @@
 
 void swap(int a[], int i, int j)
 {
-    int temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
+  int temp = a[i];
+  a[i] = a[j];
+  a[j] = temp;
 }
 
 void print(int a[], int len)
 {
-    for (int i = 0; i < len; i++) {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
+  for (int i = 0; i < len; i++) {
+    printf("%d ", a[i]);
+  }
+  printf("\n");
 }
 
 
 void bubble_sort(int a[], int len)
 {
-    for (int i = 0; i < len - 1; i++) {
-        for (int j = 0; j < len - 1 - i; j++) { // 熟悉的 len - 1 - i
-            if (a[j] > a[j + 1]) {
-                swap(a, j, j + 1);
-            }
-        }
+  for (int i = 0; i < len - 1; i++) {
+    for (int j = 0; j < len - 1 - i; j++) { // 熟悉的 len - 1 - i
+      if (a[j] > a[j + 1]) {
+        swap(a, j, j + 1);
+      }
     }
+  }
 }
 
 void bubble_sort_youhua(int a[], int len)
 {
-    for (int i = 0; i < len - 1; i++) {
-        bool swapped = false;          // 局部有序时可提高排序速度
-        for (int j = 0; j < len - 1 - i; j++) {
-            if (a[j] > a[j + 1]) {
-                swap(a, j, j + 1);
-                swapped = true;
-            }
-        }
-        if (! swapped) {
-            break;
-        }
+  for (int i = 0; i < len - 1; i++) {
+    bool swapped = false;          // 局部有序时可提高排序速度
+    for (int j = 0; j < len - 1 - i; j++) {
+      if (a[j] > a[j + 1]) {
+        swap(a, j, j + 1);
+        swapped = true;
+      }
     }
+    if (! swapped) {
+      break;
+    }
+  }
 }
 
 void bubble_sort_2(int a[], int len)
 {
-    for (int i = len - 1; i > 0; i--) { // 代码上更简洁一些
-        for (int j = 0; j < i; j++) {
-            if (a[j] > a[j + 1]) {
-                swap(a, j, j + 1);
-            }
-        }
+  for (int i = len - 1; i > 0; i--) { // 代码上更简洁一些
+    for (int j = 0; j < i; j++) {
+      if (a[j] > a[j + 1]) {
+        swap(a, j, j + 1);
+      }
     }
+  }
 }
 
 void bubble_sort_2_youhua(int a[], int len)
 {
-    for (int i = len - 1; i > 0; i--) {
-        bool swapped = false;
-        for (int j = 0; j < i; j++) {
-            if (a[j] > a[j + 1]) {
-                swap(a, j, j + 1);
-                swapped = true;
-            }
-        }
-        if (! swapped) {
-            break;
-        }
+  for (int i = len - 1; i > 0; i--) {
+    bool swapped = false;
+    for (int j = 0; j < i; j++) {
+      if (a[j] > a[j + 1]) {
+        swap(a, j, j + 1);
+        swapped = true;
+      }
     }
+    if (! swapped) {
+      break;
+    }
+  }
 }
 
 int main()
 {
-    {
-        int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+    int len = sizeof(a) / sizeof(int);
 
-        bubble_sort(a, len);
+    bubble_sort(a, len);
 
-        print(a, len);
+    print(a, len);
+  }
+
+  {
+    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+    int len = sizeof(a) / sizeof(int);
+
+    bubble_sort_youhua(a, len);
+
+    for (int i = 0; i < len; i++) {
+      printf("%d ", a[i]);
     }
+    printf("\n");
+  }
 
-    {
-        int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+    int len = sizeof(a) / sizeof(int);
 
-        bubble_sort_youhua(a, len);
+    bubble_sort_2(a, len);
 
-        for (int i = 0; i < len; i++) {
-            printf("%d ", a[i]);
-        }
-        printf("\n");
+    for (int i = 0; i < len; i++) {
+      printf("%d ", a[i]);
     }
+    printf("\n");
+  }
 
-    {
-        int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
-        int len = sizeof(a) / sizeof(int);
+  {
+    int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
+    int len = sizeof(a) / sizeof(int);
 
-        bubble_sort_2(a, len);
+    bubble_sort_2_youhua(a, len);
 
-        for (int i = 0; i < len; i++) {
-            printf("%d ", a[i]);
-        }
-        printf("\n");
+    for (int i = 0; i < len; i++) {
+      printf("%d ", a[i]);
     }
+    printf("\n");
+  }
 
-    {
-        int a[] = { 56, 22, 67, 32, 59, 12, 89, 26, 48, 37 };
-        int len = sizeof(a) / sizeof(int);
-
-        bubble_sort_2_youhua(a, len);
-
-        for (int i = 0; i < len; i++) {
-            printf("%d ", a[i]);
-        }
-        printf("\n");
-    }
-
-    return 0;
+  return 0;
 }

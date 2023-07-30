@@ -1,10 +1,10 @@
 
 首要一条是记住链表的结构:
 ```c
-    struct ListNode {
-        int val;
-        ListNode* next;
-    };
+  struct ListNode {
+    int val;
+    ListNode* next;
+  };
 ```
 
 考虑特殊的链表及链表上特殊的位置。

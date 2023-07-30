@@ -42,24 +42,20 @@ ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
     }
   }
 
-  while (pNode1) {
+  if (pNode1) {
     if (pHead == nullptr) {
       pHead = pNode1;
     } else {
       pCur->next = pNode1;
     }
-    pCur = pNode1;
-    pNode1 = pNode1->next;
   }
 
-  while (pNode2) {
+  if (pNode2) {
     if (pHead == nullptr) {
       pHead = pNode2;
     } else {
       pCur->next = pNode2;
     }
-    pCur = pNode2;
-    pNode2 = pNode2->next;
   }
 
   return pHead;

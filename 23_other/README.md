@@ -41,3 +41,5 @@
 - [第一种](partition_1.cpp)
 - [第二种](partition_2.cpp)
 - [第三种](partition_3.cpp)
+
+相比于前两种，第三种不需要额外分配内存空间。
