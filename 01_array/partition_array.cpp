@@ -6,20 +6,20 @@
 
 #include <stdio.h>
 
-void partition_array(int a[], int len, int comp)
+void partition_array(int a[], int len, int val)
 {
-  int front = 0;
-  int last = len - 1;
+  int low = 0;
+  int high = len - 1;
 
-  while (front < last) {
-    while (a[front] >= comp)
-      front++;
-    while (a[last] < comp)
-      last--;
-    if (front < last) {
-      int tmp = a[front];
-      a[front] = a[last];
-      a[last] = tmp;
+  while (low < high) {
+    while (a[low] >= val)
+      low++;
+    while (a[high] < val)
+      high--;
+    if (low < high) {
+      int tmp = a[low];
+      a[low] = a[high];
+      a[high] = tmp;
     }
   }
 
