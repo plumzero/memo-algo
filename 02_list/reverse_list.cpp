@@ -27,21 +27,22 @@ ListNode* reverse_list(ListNode* pHead)
   return preNode;
 }
 
-ListNode* reverse_list3(ListNode* pNode, ListNode* pHead)
+ListNode* reverse(ListNode* preNode, ListNode* pNode)
 {
-  if (pNode->next == nullptr)
-    return pNode;
+  if (pNode == nullptr)
+    return preNode;
+  ListNode* pNext = pNode->next;
+  pNode->next = preNode;
+  // preNode = pNode;
+  // pNode = pNext;
+  return reverse(pNode, pNext);
+}
 
-  // ListNode* pCopy = pNode;2
-  // return reverse_list3(pNode->next);
-  ListNode* pNext = reverse_list3(pNode->next, pHead);
-  pNext->next = pNode;
-
-  if (pNode == pHead) {
-    pNode->next = nullptr;
-  }
-
-  return pNode;
+ListNode* reverse_list3(ListNode* pHead)
+{
+  // ListNode* preNode = nullptr;
+  // ListNode* pNode = pHead;
+  return reverse(nullptr, pHead);
 }
 
 // 分析二:
@@ -86,7 +87,7 @@ int main()
   {
     ListNode* node1 = create_list(6, 11, 22, 33, 44, 55, 66);
 
-    ListNode* pNewHeader = reverse_list3(node1, node1);
+    ListNode* pNewHeader = reverse_list3(node1);
 
     print_list(pNewHeader);
     destroy_list(&pNewHeader);   

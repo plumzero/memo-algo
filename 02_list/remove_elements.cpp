@@ -6,6 +6,7 @@
 
 #include "listnode.h"
 
+// 需要考虑特殊的头节点情况
 // 使用虚拟头节点更方便
 void remove_elements(ListNode** pHead, int val)
 {
