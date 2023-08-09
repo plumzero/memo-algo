@@ -6,34 +6,39 @@
 
 #include <stdio.h>
 
-void partition_array(int a[], int len, int val)
+void swap(int a[], int i, int j)
 {
-  int low = 0;
-  int high = len - 1;
+  int t = a[i];
+  a[i] = a[j];
+  a[j] = t;
+}
 
-  while (low < high) {
-    while (a[low] >= val)
-      low++;
-    while (a[high] < val)
-      high--;
-    if (low < high) {
-      int tmp = a[low];
-      a[low] = a[high];
-      a[high] = tmp;
+int partition_array(int a[], int len, int val)
+{
+  int i, j;
+  i = j = 0;
+  for (i = 0; i < len; i++) {
+    if (a[i] >= val) {
+      if (i != j) {
+        swap(a, i, j);
+      }
+      j++;
     }
   }
 
+  return j;
 }
 
 int main()
 {
   int a[] = { -7, 0, 5, -8, 9, -4, 3, -2 };
   int len = sizeof(a) / sizeof(int);
-  partition_array(a, len, 3);
+  int pos = partition_array(a, len, 3);
   for (int i = 0; i < len; i++) {
     printf("%d ", a[i]);
   }
   printf("\n");
+  printf("pos=%d\n", pos);
   
   return 0;
 }
