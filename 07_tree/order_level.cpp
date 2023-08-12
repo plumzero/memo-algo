@@ -1,5 +1,30 @@
 
+// 102 二叉树的层序遍历
+
 #include "btree.h"
+#include <stdio.h>
+#include <queue>
+
+void level_order(BinTreeNode* root)
+{
+  if (root != nullptr) {
+    std::queue<BinTreeNode*> _queue;
+    _queue.push(root);
+    
+    while (_queue.size() > 0) {
+      BinTreeNode* node = _queue.front();
+      _queue.pop();
+      printf("%d ", node->val);
+      if (node->left) {
+        _queue.push(node->left);
+      }
+      if (node->right) {
+        _queue.push(node->right);
+      }
+    }
+    printf("\n");
+  }
+}
 
 //     1
 //    / \
@@ -23,23 +48,7 @@ int main()
   connect_node(node3, node5, node6);
   connect_node(node5, nullptr, node7);
 
-  preorder_print(node1);
-  printf("\n");
-  preorder_print2(node1);
-
-  inorder_print(node1);
-  printf("\n");
-  inorder_print2(node1);
-
-  postorder_print(node1);
-  printf("\n");
-  postorder_print2(node1);
-
-  level_print(node1);
-
-  tree_print(node1);
-
-  printf("%d\n", tree_depth(node1));
+  level_order(node1);
 
   destroy_tree(&node1);
 

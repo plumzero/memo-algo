@@ -1,4 +1,8 @@
 
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
 // 15 三数之和
 
 // 在一个数组中，找到三个元素(这三个元素就是一个三元组)，使其相加等于 0
@@ -12,11 +16,7 @@
 // 分析
 // 先将数组排序，定义两个指针分别指向排序后数组的头部和尾部。计算两个指针指向元素之和，然后利用二分查找确定剩下的一个元素
 
-#include <vector>
-#include <iostream>
-#include <algorithm>
-
-int bin_search(std::vector<int>& a, int low, int high, int val)
+int bin_search(const std::vector<int>& a, int low, int high, int val)
 {
   while (low <= high) {
     int mid = low + (high - low) / 2;
@@ -33,40 +33,31 @@ int bin_search(std::vector<int>& a, int low, int high, int val)
 
 std::vector<std::vector<int>> three_sum(std::vector<int>& a)
 {
-  std::vector<std::vector<int>> alls;
-
   std::sort(a.begin(), a.end());
 
-  int low = 0, high = (int)a.size() - 1;
-  while (low < high) {
-    int pos, val;
-    val = 0 - (a[low] + a[high]);
-    pos = bin_search(a, low, high, val);
-    if (pos != -1) {
-      alls.push_back({a[low], a[pos], a[high]});
+  std::vector<std::vector<int>> vec;
+
+  int n = (int)a.size() - 1;
+
+  for (int i = 0; i <= n; ) {
+    for (int j = i + 2; j <= n; ) {
+      int target = 0 - (a[i] + a[j]);
+      int pos = bin_search(a, i, j, target);
+      if (pos != -1) {
+        vec.push_back({a[i], a[pos], a[j]});
+      }
+      j++;
+      while (j <= n && a[j - 1] == a[j]) {
+        j++;
+      }
     }
-    int old_low = low;
-    int old_high = high;
-    while (low < high && a[old_low] == a[low])
-      low++;
-    while (low < high && a[old_high] == a[high])
-      high--;
-    if (low == old_high) {  // 当数组元素全为 0 时的情况
-      return alls;
-    }
-    val = 0 - (a[low] + a[old_high]);
-    pos = bin_search(a, low, old_high, val);
-    if (pos != -1) {
-      alls.push_back({a[low], a[pos], a[old_high]});
-    }
-    val = 0 - (a[old_low] + a[high]);
-    pos = bin_search(a, old_low, high, val);
-    if (pos != -1) {
-      alls.push_back({a[old_low], a[pos], a[high]});
+    i++;
+    while (i <= n && a[i - 1] == a[i]) {
+      i++;
     }
   }
 
-  return alls;
+  return vec;
 }
 
 int main()
@@ -80,6 +71,7 @@ int main()
       }
       std::cout << std::endl;
     }
+    std::cout << std::endl;
   }
 
   {
@@ -91,6 +83,7 @@ int main()
       }
       std::cout << std::endl;
     }
+    std::cout << std::endl;
   }
 
   {
@@ -102,6 +95,7 @@ int main()
       }
       std::cout << std::endl;
     }
+    std::cout << std::endl;
   }
 
   return 0;
