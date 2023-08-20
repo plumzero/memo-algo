@@ -49,7 +49,7 @@ ListNode* first_common_node(ListNode* pHead1, ListNode* pHead2)
     diff = len2 - len1;
   }
 
-  for (int i = 0; i < diff; i++) {
+  for (int i = 1; i <= diff; i++) {
     pLong = pLong->next;
   }
 

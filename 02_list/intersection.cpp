@@ -28,7 +28,7 @@ ListNode* intersection(ListNode* pHead1, ListNode* pHead2)
         pCur->next = pNode1;
       }
       pCur = pNode1;
-      pNode1 = pNode1->next;
+      pNode1 = pNode1->next; // 为了更易理解，这两行不要去掉
       pNode2 = pNode2->next;
     }
 
