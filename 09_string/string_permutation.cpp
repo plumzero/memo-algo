@@ -13,34 +13,42 @@
 
 #include <stdio.h>
 
-void permutation(char* str, int start, int end)
+void swap(char* str, int i, int j) {
+  char ch = str[i];
+  str[i] = str[j];
+  str[j] = ch;
+}
+
+void _permutation(char* str, int start, int end)
 {
-    // assert(str != nullptr);
+  // assert(str != nullptr);
 
-    if (start == end) {
-        printf("%s\n", str);
-        return ;
-    }
+  if (start == end) {
+    printf("%s\n", str);
+    return ;
+  }
 
-    for (int i = start; i <= end; i++) {
-        char ch = str[start];
-        str[start] = str[i];
-        str[i] = ch;
-        permutation(str, start + 1, end);
-        ch = str[start];
-        str[start] = str[i];
-        str[i] = ch;
-    }
+  for (int i = start; i <= end; i++) {
+    swap(str, start, i);
+    _permutation(str, start + 1, end);
+    swap(str, start, i);
+  }
+}
+
+void permutation(char* str)
+{
+  int len = -1;
+  while (str[++len]);
+
+  _permutation(str, 0, len -1);
 }
 
 int main()
 {
+  {
     char str[] = "abc";
-    int len = -1;
-    while (str[++len]);
+    permutation(str);
+  }
 
-    // printf("%d\n", len);
-    permutation(str, 0, len - 1);
-
-    return 0;
+  return 0;
 }

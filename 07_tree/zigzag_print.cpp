@@ -13,33 +13,39 @@
 //    / \
 //   7   8
 
-void bfs_with_two_array(BinTreeNode* root)
+// 广度优先遍历
+void zigzag_print(BinTreeNode* root)
 {
-    if (root == nullptr)
-        return ;
+  if (root == nullptr)
+    return ;
 
-    std::vector<BinTreeNode*> vec[2];
-    int cur = 0;
-    int nxt = 1;
-    bool even = false;
-    vec[cur].push_back(root);
+  std::vector<BinTreeNode*> vec[2];
+  int cur = 0;
+  int nxt = 1;
+  bool even = false;
 
-    while (! vec[cur].empty()) {
-        for (auto node: vec[cur]) {
-            if (node->left != nullptr) vec[nxt].push_back(node->left);
-            if (node->right != nullptr) vec[nxt].push_back(node->right);
-        }
-        if (even) std::reverse(vec[cur].begin(), vec[cur].end());   // 反转一下
-        for (auto node: vec[cur]) {
-            printf("%d ", node->val);
-        }
-        vec[cur].clear();
-        cur = 1 - cur;
-        nxt = 1 - nxt;
-        even = ! even;
+  vec[cur].push_back(root);
+
+  while (! vec[cur].empty()) {
+    for (auto node : vec[cur]) {
+      if (node->left) vec[nxt].push_back(node->left);
+      if (node->right) vec[nxt].push_back(node->right);
     }
-    printf("\n");
+    if (even) {
+      std::reverse(vec[cur].begin(), vec[cur].end());
+    }
+    for (auto node : vec[cur]) {
+      printf("%d ", node->val);
+    }
+    vec[cur].clear();
+    cur = 1 - cur;
+    nxt = 1 - nxt;
+    even = !even;
+  }
+  
+  printf("\n");
 }
+
 
 int main()
 {
@@ -57,7 +63,7 @@ int main()
     connect_node(node3, node5, node6);
     connect_node(node5, node7, node8);
 
-    bfs_with_two_array(node1);
+    zigzag_print(node1);
 
     destroy_tree(&node1);
 

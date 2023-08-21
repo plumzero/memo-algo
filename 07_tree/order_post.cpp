@@ -30,9 +30,9 @@ void postorder2(BinTreeNode* root)
         node = _stack.top();
         if (node->right == nullptr || node->right == rnode) { // 如果 node 没有右孩子节点，或者右孩子节点已经访问过
           printf("%d ", node->val);
+          _stack.pop();
           rnode = node;
           node = nullptr;
-          _stack.pop();
         } else {
           node = node->right;
         }

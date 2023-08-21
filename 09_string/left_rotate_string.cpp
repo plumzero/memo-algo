@@ -11,56 +11,59 @@
 // 分别左旋得到 "bagfedc"，之后对字符串整个旋转得到 "cdefgab"
 
 #include <stdio.h>
-#include <string.h>
 
 void reverse(char* pb, char* pe)
 {
-    // assert(pb != nullptr && pe != nullptr);
+  // assert(pb != nullptr && pe != nullptr);
 
-    while (pb < pe) {
-        char ch = *pb;
-        *pb = *pe;
-        *pe = ch;
-        pb++;
-        pe--;
-    }
+  while (pb < pe) {
+    char ch = *pb;
+    *pb = *pe;
+    *pe = ch;
+    pb++;
+    pe--;
+  }
 }
 
 void left_rotate(char* str, int n)
 {
-    // assert(str != nullptr && k >= 0);
+  // assert(str != nullptr && n >= 0);
 
-    if (strlen(str) < n)
-        return ;
+  int len = -1;
+  while (str[++len]);
 
-    char* pb = str;
-    char* pe = str + strlen(str) - 1;
-    char* px = str + n - 1;
+  if (n > len) {
+    return ;
+  }
 
-    reverse(pb, px);
-    reverse(px + 1, pe);
-    reverse(pb, pe);
+  char* p1 = str;
+  char* p2 = str + n - 1;
+  char* p3 = str + n;
+  char* p4 = str + len - 1;
+  reverse(p1, p2);
+  reverse(p3, p4);
+  reverse(p1, p4);
 }
 
 int main()
 {
-    {
-        char str[] = "abcdefg";
-        left_rotate(str, 2);
-        printf("%s\n", str);
-    }
+  {
+    char str[] = "abcdefg";
+    left_rotate(str, 2);
+    printf("%s\n", str);
+  }
 
-    {
-        char str[] = "abcdefg";
-        left_rotate(str, 0);
-        printf("%s\n", str);
-    }
+  {
+    char str[] = "abcdefg";
+    left_rotate(str, 0);
+    printf("%s\n", str);
+  }
 
-    {
-        char str[] = "abcdefg";
-        left_rotate(str, 10);
-        printf("%s\n", str);
-    }
+  {
+    char str[] = "abcdefg";
+    left_rotate(str, 10);
+    printf("%s\n", str);
+  }
 
-    return 0;
+  return 0;
 }

@@ -10,52 +10,51 @@
 // 先翻转整个字符串，再翻转每个单词。
 
 #include <stdio.h>
-#include <string.h>
 
 // 先定义一个函数，传入两个参数，分别指向要翻转字符串的首个字节及最后一个字节
 void reverse(char* pb, char* pe)
 {
-    // assert(pb != nullptr && pe != nullptr);
+  // assert(pb != nullptr && pe != nullptr);
 
-    while (pb < pe) {
-        char ch = *pb;
-        *pb = *pe;
-        *pe = ch;
-        pb++;
-        pe--;
-    }
+  while (pb < pe) {
+    char ch = *pb;
+    *pb = *pe;
+    *pe = ch;
+    pb++;
+    pe--;
+  }
 }
 
 void reverse_sentence(char* str)
 {
-    // assert(str != nullptr);
+  int len = -1;
+  while (str[++len]);
 
-    int len = strlen(str);
+  reverse(str, str + len - 1);
 
-    reverse(str, str + len - 1);
-
-    char* pb = str;
-    char* pe = str;
-    while (*pb != '\0') {
-        if (*pb == ' ') {
-            pb++;
-            pe++;
-        } else if (*pe == ' ' || *pe == '\0') {
-            reverse(pb, pe - 1);
-            pb = pe;
-        } else {
-            pe++;
-        }
+  char* pb = str;
+  char* pe = str;
+  while (*pb != '\0') {
+    if (*pb == ' ') {
+      pb++;
+      pe++;
+    } else if (*pe == ' ' || *pe == '\0') {
+      reverse(pb, pe - 1);
+      pb = pe;
+    } else {
+      pe++;
     }
+  }
 }
+
 
 int main()
 {
-    char str[] = "I am a student.";
+  char str[] = "I am a student.";
 
-    reverse_sentence(str);
+  reverse_sentence(str);
 
-    printf("%s\n", str);
+  printf("%s\n", str);
 
-    return 0;
+  return 0;
 }

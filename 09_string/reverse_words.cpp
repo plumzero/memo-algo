@@ -21,7 +21,7 @@
 void reverse(std::string& str, int low, int high)
 {
   while (low < high) {
-    auto ch = str[low];
+    char ch = str[low];
     str[low] = str[high];
     str[high] = ch;
     low++;
@@ -29,42 +29,57 @@ void reverse(std::string& str, int low, int high)
   }
 }
 
+void erase_extra_spaces(std::string& str)
+{
+  int fast, slow, len;
+  fast = slow = 0;
+  len = (int)str.size();
+
+  // 头部空格
+  while (fast < len && str[fast] == ' ') {
+    fast++;
+  }
+  
+  // 中间空格
+  for (; fast < len; fast++) {
+    if (fast - 1 > 0 && str[fast - 1] == str[fast] && str[fast] == ' ') {
+      continue;
+    } else {
+      str[slow] = str[fast];
+      slow++;
+    }
+  }
+  
+  // 尾部空格
+  if (slow - 1 > 0 && str[slow - 1] == ' ') {
+    str.resize(slow - 1);
+  } else {
+    str.resize(slow);
+  }
+}
+
 void reverse_words(std::string& str)
 {
-  reverse(str, 0, (int)str.size() - 1);
+  erase_extra_spaces(str);
+
+  int len = (int)str.size();
+
+  reverse(str, 0, len - 1);
 
   int i, j;
-  int step = 0;
+  i = j = 0;
 
-  i = 0;
-  // 头部空格情况
-  while (str[i] == ' ') {
-    i++;
-    step = 1;
-  }
-  j = i;
-
-  while (j != (int)str.size()) {
+  while (i != len) {
     if (str[i] == ' ') {
       i++;
       j++;
-    } else if (str[j] != ' ') {
-      j++;
-    } else {
+    } else if (str[j] == ' ' || j == len) {
       reverse(str, i, j - 1);
       i = j;
+    } else {
+      j++;
     }
   }
-
-  if (step > 0) {
-    int len = str.size() - step;
-    for (int i = 0; i < len; i++) {
-      str[i] = str[i + step];
-    }
-    str.erase(len);
-  }
-
-  // 翻转后尾部空格的处理...略
 }
 
 int main()

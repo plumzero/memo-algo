@@ -17,34 +17,34 @@
 
 int longest_substring(const char* str)
 {
-    int hash[26];
-    for (int i = 0; i < 26; i++) {
-        hash[i] = -1;
+  int hash[26];
+  for (int i = 0; i < 26; i++) {
+    hash[i] = -1;
+  }
+  
+  int len = -1;
+  while (str[++len]);
+  
+  int longest = 0;
+  int pos = -1;
+  
+  for (int i = 0; i < len; i++) {
+    int key = str[i] - 'a';
+    if (hash[key] >= 0) {
+      pos = std::max(hash[key], pos);
     }
-    
-    int len = -1;
-    while (str[++len]);
-    
-    int longest = 0;
-    int pos = -1;
-    
-    for (int i = 0; i < len; i++) {
-        int key = str[i] - 'a';
-        if (hash[key] >= 0) {
-            pos = std::max(hash[key], pos);
-        }
-        hash[key] = i;
-        longest = std::max(longest, i - pos);
-    }
-    
-    return longest;
+    hash[key] = i;
+    longest = std::max(longest, i - pos);
+  }
+  
+  return longest;
 }
 
 int main()
 {
-    printf("%d\n", longest_substring("arabca"));
-    printf("%d\n", longest_substring("arabcacfr"));
-    printf("%d\n", longest_substring("arabcacfrg"));
+  printf("%d\n", longest_substring("arabca"));
+  printf("%d\n", longest_substring("arabcacfr"));
+  printf("%d\n", longest_substring("arabcacfrg"));
 
-    return 0;
+  return 0;
 }

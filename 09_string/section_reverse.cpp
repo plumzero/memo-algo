@@ -14,7 +14,7 @@ void reverse(std::string& str, int begin, int end)
   int low = begin;
   int high = end - 1;
   while (low < high) {
-    auto ch = str[low];
+    char ch = str[low];
     str[low] = str[high];
     str[high] = ch;
     low++;

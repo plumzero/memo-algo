@@ -8,6 +8,7 @@
 - [后序遍历](order_post.cpp)
 - [层次遍历](order_level.cpp)
 - [树状遍历](order_tree.cpp)
+- [之字遍历](zigzag_print.cpp)
 
 ### 树的特征
 

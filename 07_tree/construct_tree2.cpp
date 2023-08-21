@@ -20,32 +20,32 @@
 // 后序: 4 7 2 1 5 3 8 6
 BinTreeNode* _construct_tree(int preorder[], int pb, int pe, int inorder[], int ib, int ie)
 {
-    int x;
-    for (x = ib; x <= ie; x++) {
-        if (inorder[x] == preorder[pb])
-            break;
-    }
+  int x;
+  for (x = ib; x <= ie; x++) {
+    if (inorder[x] == preorder[pb])
+      break;
+  }
 
-    BinTreeNode* root = new BinTreeNode();
-    root->val = preorder[pb];
-    int left_count = x - ib;
-    int right_count = ie - x;
+  BinTreeNode* root = new BinTreeNode();
+  root->val = preorder[pb];
+  int left_count = x - ib;
+  int right_count = ie - x;
 
-    if (left_count > 0) {
-        root->left = _construct_tree(preorder, pb + 1, pb + left_count, inorder, ib, x - 1);
-    }
-    if (right_count > 0) {
-        root->right = _construct_tree(preorder, pb + left_count + 1, pe, inorder, x + 1, ie);
-    }
+  if (left_count > 0) {
+    root->left = _construct_tree(preorder, pb + 1, pb + left_count, inorder, ib, x - 1);
+  }
+  if (right_count > 0) {
+    root->right = _construct_tree(preorder, pb + left_count + 1, pe, inorder, x + 1, ie);
+  }
 
-    return root;
+  return root;
 }
 
 BinTreeNode* construct_tree(int preorder[], int inorder[], int len)
 {
-    // assert(preorder != nullptr && inorder != nullptr && len > 0);
+  // assert(preorder != nullptr && inorder != nullptr && len > 0);
 
-    return _construct_tree(preorder, 0, len - 1, inorder, 0, len - 1);
+  return _construct_tree(preorder, 0, len - 1, inorder, 0, len - 1);
 }
 
 // 示例树
@@ -58,41 +58,41 @@ BinTreeNode* construct_tree(int preorder[], int inorder[], int len)
 //          7       8
 int main()
 {
-    {
-        const int len = 8;
-        int preorder[len] = {1, 2, 4, 7, 3, 5, 6, 8};
-        int inorder[len] = {4, 7, 2, 1, 5, 3, 8, 6};
+  {
+    const int len = 8;
+    int preorder[len] = {1, 2, 4, 7, 3, 5, 6, 8};
+    int inorder[len] = {4, 7, 2, 1, 5, 3, 8, 6};
 
-        BinTreeNode* root = construct_tree(preorder, inorder, len);
+    BinTreeNode* root = construct_tree(preorder, inorder, len);
 
-        postorder_print2(root);
+    postorder_print2(root);
 
-        destroy_tree(&root);
-    }
+    destroy_tree(&root);
+  }
 
-    {
-        const int len = 2;
-        int preorder[len] = {1, 2};
-        int inorder[len] = {2, 1};
+  {
+    const int len = 2;
+    int preorder[len] = {1, 2};
+    int inorder[len] = {2, 1};
 
-        BinTreeNode* root = construct_tree(preorder, inorder, len);
+    BinTreeNode* root = construct_tree(preorder, inorder, len);
 
-        postorder_print2(root);
+    postorder_print2(root);
 
-        destroy_tree(&root);   
-    }
+    destroy_tree(&root);   
+  }
 
-    {
-        const int len = 1;
-        int preorder[len] = {1};
-        int inorder[len] = {1};
+  {
+    const int len = 1;
+    int preorder[len] = {1};
+    int inorder[len] = {1};
 
-        BinTreeNode* root = construct_tree(preorder, inorder, len);
+    BinTreeNode* root = construct_tree(preorder, inorder, len);
 
-        postorder_print2(root);
+    postorder_print2(root);
 
-        destroy_tree(&root);   
-    }
+    destroy_tree(&root);   
+  }
 
-    return 0;
+  return 0;
 }
