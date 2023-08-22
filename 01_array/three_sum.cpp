@@ -31,7 +31,7 @@ int bin_search(const std::vector<int>& a, int low, int high, int val)
   return -1;
 }
 
-std::vector<std::vector<int>> three_sum(std::vector<int>& a)
+std::vector<std::vector<int>> three_sum2(std::vector<int>& a)
 {
   std::sort(a.begin(), a.end());
 
@@ -54,6 +54,49 @@ std::vector<std::vector<int>> three_sum(std::vector<int>& a)
     i++;
     while (i <= n && a[i - 1] == a[i]) {
       i++;
+    }
+  }
+
+  return vec;
+}
+
+std::vector<std::vector<int>> three_sum(std::vector<int>& a)
+{
+  std::sort(a.begin(), a.end());
+
+  std::vector<std::vector<int>> vec;
+  int n = (int)a.size();
+
+  for (int i = 0; i <= n - 3; i++) {
+    int x = a[i];
+    // 去重
+    if (i > 0 && x == a[i - 1]) {
+      continue;
+    }
+    // 优化一
+    if (x + a[i + 1] + a[i + 2] > 0)
+      break;
+    // 优化二
+    if (x + a[n - 2] + a[n - 1] < 0)
+      break;
+    int j = i + 1;
+    int k = n - 1;
+    while (j < k) {
+      int sum = x + a[j] + a[k];
+      if (sum == 0) {
+        vec.push_back({x, a[j], a[k]});
+        j++;
+        k--;
+        // 去重
+        while (a[j] == a[j - 1])
+          j++;
+        while (a[k] == a[k + 1])
+          k++;
+      } else if (sum > 0) {
+        k--;
+      } else {
+        j++;
+      }
     }
   }
 
