@@ -5,25 +5,24 @@
 
 int gcd(int a, int b)
 {
-    if (a < b) {
-        int tmp = a;
-        a = b;
-        b = tmp;
-    }
+  if (a < b) {
+    int tmp = a;
+    a = b;
+    b = tmp;
+  }
 
-    int r;
-    do {
-        r = a % b;
-        a = b;
-        b = r;
-    } while(r != 0);
+	while (b != 0) {
+		int r = b;
+		b = a % b;
+		a = r;
+	}
 
-    return r;
+    return a;
 }
 
 int main()
 {
-    printf("%d\n", gcd(285,220));
+  printf("%d\n", gcd(285,220));
 
-    return 0;
+  return 0;
 }
