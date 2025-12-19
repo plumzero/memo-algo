@@ -11,13 +11,12 @@ void del_kth_from_end(ListNode** pHead, int k)
 {
   ListNode* dummyNode = new ListNode();
   ListNode* preNode = dummyNode;
-  ListNode* pNode = *pHead;
-  preNode->next = pNode;
+  preNode->next = *pHead;
 
   ListNode* pFast = *pHead;
   ListNode* pSlow = *pHead;
 
-  for (int i = 1; i <= k - 1; i++) {
+  for (int i = 1; i < k; i++) {
     if (pFast->next == nullptr) {
       return ;
     }

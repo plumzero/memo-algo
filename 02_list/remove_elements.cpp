@@ -16,15 +16,15 @@ void remove_elements(ListNode** pHead, int val)
   preNode->next = pNode;
 
   while (pNode) {
-    ListNode* pNext = pNode->next;
     if (pNode->val == val) {
+      ListNode* pNext = pNode->next;
       preNode->next = pNext;
       delete pNode;
-      pNode = nullptr;
+      pNode = pNext;
     } else {
       preNode = pNode;
+      pNode = pNode->next;
     }
-    pNode = pNext;
   }
 
   *pHead = dummyNode->next;

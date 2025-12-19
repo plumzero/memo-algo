@@ -15,33 +15,27 @@
 
 void delete_dup(ListNode** pHead)
 {
-  // assert(pHead != nullptr && *pHead != nullptr);
-
+  ListNode* dummyNode = new ListNode();
+  ListNode* preNode = dummyNode;
+  preNode->next = *pHead;
   ListNode* pNode = *pHead;
-  ListNode* preNode = nullptr;
 
-  // 对 pNode 指向的节点进行处理
   while (pNode) {
-    if (pNode->next == nullptr) {
-      pNode = pNode->next;
-    } else if (pNode->val != pNode->next->val) { // pNode->next != nullptr && 此条件
-      preNode = pNode;
-      pNode = pNode->next;
-    } else { // pNode->next != nullptr && pNode->val == pNode->next->val
+    if (pNode->next != nullptr && pNode->val == pNode->next->val) {
       int val = pNode->val;
-      while (pNode != nullptr && pNode->val == val) { // 找到第一个不为 val 的节点
+      while (pNode != nullptr && pNode->val == val) {
         ListNode* pNext = pNode->next;
         delete pNode;
-        pNode = nullptr;
         pNode = pNext;
       }
-      if (preNode == nullptr) {
-        *pHead = pNode;
-      } else {
-        preNode->next = pNode;
-      }
+      preNode->next = pNode;
+    } else {
+      preNode = pNode;
+      pNode = pNode->next;
     }
   }
+  *pHead = dummyNode->next;
+  delete dummyNode;
 }
 
 int main()

@@ -15,29 +15,56 @@
 #include <stdio.h>
 #include "listnode.h"
 
+// 最好的解法
+ListNode* merge_sort_list3(ListNode* pHead1, ListNode* pHead2)
+{
+  ListNode* dummyNode = new ListNode();
+  ListNode* preNode = dummyNode;
+  ListNode* pNode1 = pHead1;
+  ListNode* pNode2 = pHead2;
+  
+  while (pNode1 && pNode2) {
+    if (pNode1->val > pNode2-> val) {
+      preNode->next = pNode2;
+      pNode2 = pNode2->next;
+    } else {
+      preNode->next = pNode1;
+      pNode1 = pNode1->next;
+    }
+    preNode = preNode->next;
+  }
+
+  preNode->next = (pNode1 != nullptr) ? pNode1 : pNode2;
+
+  ListNode* newHead = dummyNode->next;
+  delete dummyNode;
+
+  return newHead;
+}
+
 ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
 {
   ListNode* pNode1 = pHead1;
   ListNode* pNode2 = pHead2;
   ListNode* pHead = nullptr;
-  ListNode* pCur = nullptr;
+  ListNode* preNode = nullptr;
 
   while (pNode1 && pNode2) {
     if (pNode1->val > pNode2->val) {
       if (pHead == nullptr) {
         pHead = pNode2;
       } else {
-        pCur->next = pNode2;
+        preNode->next = pNode2;
       }
-      pCur = pNode2;
+      preNode = pNode2;
       pNode2 = pNode2->next;
     } else {
       if (pHead == nullptr) {
         pHead = pNode1;
       } else {
-        pCur->next = pNode1;
+        preNode->next = pNode1;
       }
-      pCur = pNode1;
+      preNode = pNode1;
       pNode1 = pNode1->next;
     }
   }
@@ -46,7 +73,7 @@ ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
     if (pHead == nullptr) {
       pHead = pNode1;
     } else {
-      pCur->next = pNode1;
+      preNode->next = pNode1;
     }
   }
 
@@ -54,7 +81,7 @@ ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
     if (pHead == nullptr) {
       pHead = pNode2;
     } else {
-      pCur->next = pNode2;
+      preNode->next = pNode2;
     }
   }
 
@@ -114,6 +141,7 @@ int main()
   }
 
   {
+    printf("第 2 种\n");
     ListNode* head1 = create_list(4, 1, 3, 5, 7);
     ListNode* head2 = create_list(4, 2, 4, 6, 8);
     ListNode* head = merge_sort_list2(head1, head2);
@@ -137,6 +165,35 @@ int main()
 
   {
     ListNode* head = merge_sort_list2(nullptr, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
+
+  {
+    printf("第 3 种\n");
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list3(head1, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
+
+  {
+    ListNode* head1 = create_list(4, 1, 3, 5, 7);
+    ListNode* head = merge_sort_list3(head1, nullptr);
+    print_list(head);
+    destroy_list(&head);
+  }
+
+  {
+    ListNode* head2 = create_list(4, 2, 4, 6, 8);
+    ListNode* head = merge_sort_list3(nullptr, head2);
+    print_list(head);
+    destroy_list(&head);
+  }
+
+  {
+    ListNode* head = merge_sort_list3(nullptr, nullptr);
     print_list(head);
     destroy_list(&head);
   }

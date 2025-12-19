@@ -32,7 +32,7 @@ void delete_node(ListNode** pHead, ListNode* pDel)
       preNode = pNode;
       pNode = pNode->next;
     }
-    preNode->next = pDel->next;
+    preNode->next = nullptr; // pDel->next
     delete pDel;
     pDel = nullptr;
     return ;

@@ -19,19 +19,17 @@
 ListNode* meet(ListNode* pHead)
 {
   // assert(pHead != nullptr);
+  // assert(pHead->next != nullptr);
 
-  ListNode* pSlow = pHead->next;
-  if (pSlow == nullptr)
-    return nullptr;
-  
-  ListNode* pFast = pSlow->next;
-  while (pSlow && pFast) {
-    if (pSlow == pFast)
-      return pFast;
+  ListNode *pFast, *pSlow;
+  pFast = pSlow = pHead;
+
+  while (pFast != nullptr && pFast->next != nullptr) {
     pSlow = pSlow->next;
-    pFast = pFast->next;
-    if (pFast != nullptr)
-      pFast = pFast->next;
+    pFast = pFast->next->next;
+    if (pSlow == pFast) {
+      return pSlow;
+    }
   }
 
   return nullptr;
