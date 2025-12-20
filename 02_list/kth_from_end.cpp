@@ -23,9 +23,6 @@ ListNode* kth_from_end(ListNode* pHead, int k)
 
   // pFast 先走 k-1 步，保证 pFast 与 pSlow 间隔 k-1 步
   for (int i = 1; i < k; i++) {
-    // 当 i = 1 时: 若 pFast->next 不等于 nullptr，则说明链表中存在倒数第 1 个节点；否则链表中不存在倒数第 1 个节点
-    // 当 i = 2 时: 若 pFast->next 不等于 nullptr，则说明链表中存在倒数第 2 个节点；否则链表中不存在倒数第 2 个节点
-    // 以此类推
     if (pFast->next == nullptr) {
       return nullptr;
     }

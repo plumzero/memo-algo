@@ -25,11 +25,11 @@ ListNode* meet(ListNode* pHead)
   pFast = pSlow = pHead;
 
   while (pFast != nullptr && pFast->next != nullptr) {
-    pSlow = pSlow->next;
-    pFast = pFast->next->next;
     if (pSlow == pFast) {
       return pSlow;
     }
+    pSlow = pSlow->next;
+    pFast = pFast->next->next;
   }
 
   return nullptr;

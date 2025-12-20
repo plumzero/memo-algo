@@ -25,7 +25,7 @@ public:
 
 private:
   std::queue<T> _work;
-  std::queue<T> _back;
+  std::queue<T> _bkup;
 };
 
 template<typename T>
@@ -40,14 +40,14 @@ void CStack<T>::pop()
   int count = _work.size();
   count--;
   while (count > 0) {
-    _back.push(_work.front());
+    _bkup.push(_work.front());
     _work.pop();
     count--;
   }
 
   _work.pop();
 
-  _work = std::move(_back);
+  _work = std::move(_bkup);
 }
 
 template<typename T>

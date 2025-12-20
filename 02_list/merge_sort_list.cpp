@@ -36,10 +36,10 @@ ListNode* merge_sort_list3(ListNode* pHead1, ListNode* pHead2)
 
   preNode->next = (pNode1 != nullptr) ? pNode1 : pNode2;
 
-  ListNode* newHead = dummyNode->next;
+  ListNode* pHead = dummyNode->next;
   delete dummyNode;
 
-  return newHead;
+  return pHead;
 }
 
 ListNode* merge_sort_list(ListNode* pHead1, ListNode* pHead2)
