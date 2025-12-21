@@ -12,7 +12,7 @@ int partition(int a[], int low, int high)
 {
   int pivot = a[high];
   while (low < high) {
-    while (low < high && pivot >= a[low])      // 将第一个元素作为枢轴元素，则必须先从后面往前比较
+    while (low < high && pivot >= a[low])      // 将最后一个元素作为枢轴元素，则必须先从前面往后比较；将第一个元素作为枢轴元素，则必须先从后面往前比较
       low++;
     a[high] = a[low];
     while (low < high && pivot <= a[high])

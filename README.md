@@ -51,16 +51,16 @@
 
 - [用一个队列实现一个栈](03_stack/stack_by_one_queue.cpp)
 - [用两个队列实现一个栈](03_stack/stack_by_two_queues.cpp)
+- [实现一个无锁栈](03_stack/freelock_stack.cpp)
 
 - [用两个栈实现一个队列](04_queue/queue_by_two_stacks.cpp)
 - [实现一个具有超时机制的循环队列](04_queue/timeout_queue.cpp)
 - [实现一个无锁队列](04_queue/freelock_queue.cpp)
 
-- [二叉树的前序遍历](07_tree/order_pre.cpp)
-- [二叉树的中序遍历](07_tree/order_in.cpp)
-- [二叉树的后序遍历](07_tree/order_post.cpp)
-- [二叉树的水平遍历](07_tree/order_level.cpp)
-- [二叉树的树状遍历](07_tree/order_tree.cpp)
+- [二叉树的前序遍历(根左右)](07_tree/order_pre.cpp)
+- [二叉树的中序遍历(左根右)](07_tree/order_in.cpp)
+- [二叉树的后序遍历(左右根)](07_tree/order_post.cpp)
+- [二叉树的层序遍历(BFS)](07_tree/order_level.cpp)
 
 - [atoi实现](09_string/atoi.cpp)
 - [删除冗余空格](09_string/erase_extra_spaces.cpp)
@@ -72,5 +72,4 @@
 - [冒泡排序](12_sort/03_change/bubble_sort.cpp)
 - [快速排序](12_sort/03_change/quick_sort.cpp)
 
-- [最大公约数](20_numerical/gcd.cpp)
 - [线程交替打印](23_other/print_between_threads.cpp)

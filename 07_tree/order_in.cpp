@@ -8,9 +8,9 @@
 void inorder(BinTreeNode* root)
 {
   if (root != nullptr) {
-    inorder_print(root->left);
+    inorder(root->left);
     printf("%d ", root->val);
-    inorder_print(root->right);
+    inorder(root->right);
   }
 }
 

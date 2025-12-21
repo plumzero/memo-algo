@@ -8,8 +8,8 @@
 void postorder(BinTreeNode* root)
 {
   if (root != nullptr) {
-    postorder_print(root->left);
-    postorder_print(root->right);
+    postorder(root->left);
+    postorder(root->right);
     printf("%d ", root->val);
   }
 }

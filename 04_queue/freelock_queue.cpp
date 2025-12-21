@@ -21,28 +21,28 @@ public:
   bool Enqueue(const T& value)
   {
     size_t new_tail = 0;
-    size_t old_tail = tail.load(std::memory_order::memory_order_acquire);
+    size_t old_tail = tail.load(std::memory_order_acquire);
     do {
       new_tail = (old_tail + 1) % capacity;
-      if (new_tail == head.load(std::memory_order::memory_order_acquire)) {
+      if (new_tail == head.load(std::memory_order_acquire)) {
         return false;
       }
       queue[old_tail] = value;
-    } while (!tail.compare_exchange_weak(old_tail, new_tail, std::memory_order::memory_order_acq_rel, std::memory_order::memory_order_release));
+    } while (!tail.compare_exchange_weak(old_tail, new_tail, std::memory_order_acq_rel, std::memory_order_release));
 
     return true;
   }
   bool Dequeue(T& value)
   {
     size_t new_head = 0;
-    size_t old_head = head.load(std::memory_order::memory_order_acquire);
+    size_t old_head = head.load(std::memory_order_acquire);
     do {
-      new_head = (old_head + 1) % capacity;
-      if (new_head == tail.load(std::memory_order::memory_order_acquire)) {
+      if (old_head == tail.load(std::memory_order_acquire)) {
         return false;
       }
       value = queue[old_head];
-    } while (!head.compare_exchange_weak(old_head, new_head, std::memory_order::memory_order_acq_rel, std::memory_order::memory_order_release));
+      new_head = (old_head + 1) % capacity;
+    } while (!head.compare_exchange_weak(old_head, new_head, std::memory_order_acq_rel, std::memory_order_release));
     
     return true;
   }
