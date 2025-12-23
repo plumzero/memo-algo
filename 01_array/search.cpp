@@ -7,7 +7,7 @@
 #include <vector>
 #include <stdio.h>
 
-int search(std::vector<int>& nums, int val)
+int binsearch(std::vector<int>& nums, int val)
 {
   size_t low = 0, high = nums.size() - 1;
 
@@ -27,13 +27,13 @@ int search(std::vector<int>& nums, int val)
 int main()
 {
   {
-    std::vector<int> vec{1, 2, 3, 4, 7, 9, 10};
-    printf("%d\n", search(vec, 2));
+    std::vector<int> vec{1, 2, 3, 2, 7, 9, 10};
+    printf("%d\n", binsearch(vec, 2));
   }
 
   {
     std::vector<int> vec{1, 2, 3, 4, 7, 9, 10};
-    printf("%d\n", search(vec, 8));
+    printf("%d\n", binsearch(vec, 8));
   }
   
   return 0;

@@ -18,8 +18,7 @@ int max_depth(BinTreeNode* root)
   int left_depth = max_depth(root->left);
   int right_depth = max_depth(root->right);
   
-  int depth = 1 + std::max(left_depth, right_depth); // 1 表示加上当前节点
-  return depth;
+  return 1 + std::max(left_depth, right_depth); // 1 表示加上当前节点
 }
 
 // 因为是对左右子树的操作，而不是对节点的操作，所以这里无法使用后序遍历的栈写法

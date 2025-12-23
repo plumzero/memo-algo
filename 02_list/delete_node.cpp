@@ -43,7 +43,6 @@ void delete_node(ListNode** pHead, ListNode* pDel)
   pDel->next = pNext->next;
   pDel->val = pNext->val;
   delete pNext;
-  pNext = nullptr;
 
   return ;
 }
